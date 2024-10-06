@@ -9,9 +9,9 @@ namespace LibraryManagementSystem.Domain.Entities
     public class Loan
     {
         public int Id { get; set; }
-        public int IdUsuario { get; set; }
-        public int IdLivro { get; set; }
-        public DateTime Emprestimo { get; set; }
+        public int IdUser { get; set; }
+        public int IdBook { get; set; }
+        public DateTime Loans { get; set; }
 
     }
 }

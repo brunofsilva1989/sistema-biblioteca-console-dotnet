@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagementSystem.Domain", "LibraryManagementSystem.Domain\LibraryManagementSystem.Domain.csproj", "{52F0DCC4-6C08-4828-A61F-F9A5F1E19610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManagementSystem.Domain", "LibraryManagementSystem.Domain\LibraryManagementSystem.Domain.csproj", "{52F0DCC4-6C08-4828-A61F-F9A5F1E19610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagementSystem.DataAccess", "LibraryManagementSystem.DataAccess\LibraryManagementSystem.DataAccess.csproj", "{682910EF-7633-4E51-8B6D-4B3AA0E53A63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManagementSystem.DataAccess", "LibraryManagementSystem.DataAccess\LibraryManagementSystem.DataAccess.csproj", "{682910EF-7633-4E51-8B6D-4B3AA0E53A63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagementSystem.Business", "LibraryManagementSystem.Business\LibraryManagementSystem.Business.csproj", "{D5322FD7-9132-4DBD-B984-CF21609B1171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManagementSystem.Business", "LibraryManagementSystem.Business\LibraryManagementSystem.Business.csproj", "{D5322FD7-9132-4DBD-B984-CF21609B1171}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagementSystem.ConsoleApp", "LibraryManagementSystem.UI\LibraryManagementSystem.ConsoleApp.csproj", "{12F1A295-41FD-42DF-80A0-8F92C095D7AB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagementSystem.Tests", "LibraryManagementSystem.Tests\LibraryManagementSystem.Tests.csproj", "{615C9938-914D-4D28-BE1E-F67479FCABC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManagementSystem.ConsoleApp", "LibraryManagementSystem.UI\LibraryManagementSystem.ConsoleApp.csproj", "{12F1A295-41FD-42DF-80A0-8F92C095D7AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{12F1A295-41FD-42DF-80A0-8F92C095D7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12F1A295-41FD-42DF-80A0-8F92C095D7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12F1A295-41FD-42DF-80A0-8F92C095D7AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{615C9938-914D-4D28-BE1E-F67479FCABC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{615C9938-914D-4D28-BE1E-F67479FCABC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{615C9938-914D-4D28-BE1E-F67479FCABC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{615C9938-914D-4D28-BE1E-F67479FCABC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,3 +1,4 @@
-﻿//Ponto de entrada da minha aplicação
+﻿using LibraryManagementSystem.ConsoleApp.Views;
 
-Console.WriteLine("Menu Application Library");
+MenuSystem.Menu();
+
