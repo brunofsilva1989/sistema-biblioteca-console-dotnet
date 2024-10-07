@@ -5,101 +5,104 @@ namespace LibraryManagementSystem.ConsoleApp.Views
 {
     public class MenuSystem
     {
+        /// <summary>
+        /// Function to show the logo
+        /// </summary>
         public static void Logo()
         {
             Console.WriteLine(@"L̲I̲B̲R̲A̲R̲Y̲ M̲A̲N̲A̲G̲E̲M̲E̲N̲T̲ S̲Y̲S̲T̲E̲M̲" + "\n");
         }
 
         /// <summary>
-        /// Função de Menu que é chamanada na Program
+        /// Menu function that is called in Program
         /// </summary>
         public static void Menu()
         {
-
-            Logo();
-            Console.WriteLine("##############################################");
-            Console.WriteLine("Digite 1: Register book (CREATE)");
-            Console.WriteLine("Digite 2: Consult book registered (READ)");
-            Console.WriteLine("Digite 3: Consult all books (READ ALL)");
-            Console.WriteLine("Digite 4: Change book (UPDATE)");
-            Console.WriteLine("Digite 5: Remove book (DELETE)");
-            Console.WriteLine("Digite 6: Register user");
-            Console.WriteLine("Digite 7: Register loan");
-            Console.WriteLine("Digite 8: Return book");
-            Console.WriteLine("##############################################\n");
-
-            Console.Write("\nDigite a sua opção:");
-            int choice = Convert.ToInt32(Console.ReadLine());
-
             LibraryDb dbContext = new LibraryDb();
+
             Bookservice srvBook = new Bookservice(dbContext);
             Userservice usrService = new Userservice();
 
-            switch (choice)
+            bool keepRunning = true;
+            while (true)
             {
-                case 1:
-                    Console.Write("Digite o título do Livro: ");
-                    string title = Console.ReadLine()!;
-                    Console.Write("Digite o autor do Livro: ");
-                    string autor = Console.ReadLine()!;
-                    Console.Write("Digite o ISBN do Livro: ");
-                    string isbn = Console.ReadLine()!;
-                    Console.Write("Digite o ano de publicação: ");
-                    int yearPublication = int.Parse(Console.ReadLine()!);
+                Logo();
+                Console.WriteLine("##############################################");
+                Console.WriteLine("Enter 1: Register book (CREATE)");
+                Console.WriteLine("Enter 2: Consult book registered (READ)");
+                Console.WriteLine("Enter 3: Consult all books (READ ALL)");
+                Console.WriteLine("Enter 4: Change book (UPDATE)");
+                Console.WriteLine("Enter 5: Remove book (DELETE)");
+                Console.WriteLine("Enter 6: Register user");
+                Console.WriteLine("Enter 7: Register loan");
+                Console.WriteLine("Enter 8: Return book");
+                Console.WriteLine("Enter 9: EXIT");
+                Console.WriteLine("##############################################\n");
+                Console.WriteLine($"Create by: Bruno Silva: {DateTime.Now}");
 
-                    srvBook.RegisterBook(title, autor, isbn, yearPublication);
-                    Menu();
-                    break;
-                case 2:
-                    Console.Write("Digite o nome do Livro ou Author: ");
-                    string searchTerm = Console.ReadLine()!;
+                Console.Write("\nEnter your option: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
 
-                    srvBook.ConsultBookRegistered(searchTerm);
-                    Menu();
-                    break;
-                case 3:
-                    srvBook.ConsultAllBooks();
-                    Console.Clear();
-                    Menu();
-                    break;
-                case 4:
-                    srvBook.ChangeBook();
-                    break;
-                case 5:
-                    srvBook.RemoveBook();
-                    break;
-                case 6:
-                    usrService.RegisterUser();
-                    break;
-                case 7:
-                    srvBook.RegisterLoan();
-                    break;
-                case 8:
-                    srvBook.ReturnBook();
-                    break;
-                case 9:
-                    Exit();
-                    break;
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nInvalid Option!");
-                    Console.ResetColor();
-                    Thread.Sleep(2000);
-                    Console.Clear();
-                    Menu();
-                    break;
-            }
 
-            Console.WriteLine("Create by: Bruno Silva: \n" + DateTime.Now);
-            Console.ReadKey();
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("Enter the title of the Book: ");
+                        string title = Console.ReadLine()!;
+                        Console.Write("Enter the author of the Book: ");
+                        string autor = Console.ReadLine()!;
+                        Console.Write("Enter the ISBN of the Book: ");
+                        string isbn = Console.ReadLine()!;
+                        Console.Write("Enter the year of publication: ");
+                        int yearPublication = int.Parse(Console.ReadLine()!);
+
+                        srvBook.RegisterBook(title, autor, isbn, yearPublication);                        
+                        break;
+                    case 2:
+                        Console.Write("Enter the name of the Book or Author: ");
+                        string searchTerm = Console.ReadLine()!;
+
+                        srvBook.ConsultBookRegistered(searchTerm);                        
+                        break;
+                    case 3:
+                        srvBook.ConsultAllBooks();
+                        Console.Clear();                        
+                        break;
+                    case 4:
+                        srvBook.ChangeBook();
+                        break;
+                    case 5:
+                        srvBook.RemoveBook();
+                        break;
+                    case 6:
+                        usrService.RegisterUser();
+                        break;
+                    case 7:
+                        srvBook.RegisterLoan();
+                        break;
+                    case 8:
+                        srvBook.ReturnBook();
+                        break;
+                    case 9:
+                        Exit();
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nInvalid Option!");
+                        Console.ResetColor();
+                        Thread.Sleep(2000);
+                        Console.Clear();
+                        Menu();
+                        break;
+                }
+            }                                   
         }
 
         public static void Exit()
         {
+            Console.WriteLine("System being shut down!!!");
+            Thread.Sleep(1000);
             Environment.Exit(0);
         }
-
-
-
     }
 }

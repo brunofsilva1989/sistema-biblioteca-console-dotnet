@@ -1,11 +1,5 @@
 ﻿using LibraryManagementSystem.DataAccess.Context;
 using LibraryManagementSystem.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Business.Services
 {
@@ -20,12 +14,12 @@ namespace LibraryManagementSystem.Business.Services
         }
 
         /// <summary>
-        /// Método para registrar um livro
+        /// Method for registering a book
         /// </summary>
-        /// <param name="title">Título do Livro</param>
-        /// <param name="author">Autor do Livro</param>
-        /// <param name="isbn">Número que identifica o livro internacionalmente</param>
-        /// <param name="yearPublication">Ano da publicação</param>
+        /// <param name="title">Book Title</param>
+        /// <param name="author">Book Author</param>
+        /// <param name="isbn">Number that identifies the book internationally</param>
+        /// <param name="yearPublication">Year of publication</param>
         public void RegisterBook(string title, string author, string isbn, int yearPublication)
         {
 
@@ -41,8 +35,9 @@ namespace LibraryManagementSystem.Business.Services
             };
 
             _dbContext.Books[bookid] = newBook;
-
-            Console.WriteLine("Dados Gravados com sucesso!");
+            
+            Console.WriteLine("Data saved successfully!");
+            Thread.Sleep(1000);
             Console.Clear();
         }
 
@@ -53,57 +48,73 @@ namespace LibraryManagementSystem.Business.Services
         /// <param name="searchTerm">Termo para busca no dicionário</param>
         public void ConsultBookRegistered(string searchTerm)
         {
+            bool keepRunning = true;
             // Busca o termo digitado no método, e busca se tem ou o titulo do livro 
-            // ou o Autor ignorando se é maiusculo ou minusculo
-            var searchBooks = _dbContext.Books.Values
-                .Where(book => book.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-                            || book.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
-
-            if (searchBooks.Any())
+            // ou o Autor ignorando se é maiusculo ou minusculo                                   
+            while (keepRunning) 
             {
-                Console.WriteLine("Livros encontrados:");
-                foreach (var book in searchBooks)
+                var searchBooks = _dbContext.Books.Values
+             .Where(book => book.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                         || book.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+
+                if (searchBooks.Any())
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Titulo: {book.Title}, Author: {book.Author}, Ano: {book.YearPublication}");
-                    Console.ResetColor();
+                    Console.WriteLine("Books found:");
+                    foreach (var book in searchBooks)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"Titulo: {book.Title}, Author: {book.Author}, Ano: {book.YearPublication}");
+                        Console.ResetColor();
+                    }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Nenhum livro encontrado");
-            }
+                else
+                {
+                    Console.WriteLine("No books found");
+                }
+               
+                Console.WriteLine("\nWant to search for another book? (Y/N): ");
+                string response = Console.ReadLine()?.Trim().ToLower();
 
-            Thread.Sleep(5000);
+                if(response == "n")
+                {
+                    keepRunning = false;
+                }else if(response == "y")
+                {
+                    Console.WriteLine("Enter the name of the Book or Author: ");
+                    searchTerm = Console.ReadLine()!;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Option. Returning to the menu");
+                    keepRunning = false;
+                }
+            }            
             Console.Clear();
         }
 
 
         /// <summary>
-        /// Método para retornar todos os Books
+        /// Method to return all Books
         /// </summary>
         public void ConsultAllBooks()
         {
-            var consultAllBooks = _dbContext.Books.Values;
-
-
-            if (consultAllBooks.Any())
+            if(_dbContext.Books.Count == 0)
             {
-                Console.WriteLine("Todos os Livros:");
-                foreach (var book in consultAllBooks)
+                Console.WriteLine("No books found");
+            }
+            else
+            {
+                foreach (var book in _dbContext.Books.Values)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Titulo: {book.Title}, Author: {book.Author}, Ano: {book.YearPublication}");
                     Console.ResetColor();
                 }
-            }else
-            { 
-                Console.WriteLine("Nenhum Livro encontrado"); 
             }
 
-            Thread.Sleep(8000);
-            Console.WriteLine("Digite qualquer tecla para voltar!");
-            Console.ReadKey();
+            Thread.Sleep(5000);
+            Console.WriteLine("Enter any key to go backs!");
+            Console.ReadKey();            
         }
 
         public void ChangeBook()
