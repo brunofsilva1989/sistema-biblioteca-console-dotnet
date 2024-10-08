@@ -10,7 +10,13 @@ namespace LibraryManagementSystem.ConsoleApp.Views
         /// </summary>
         public static void Logo()
         {
-            Console.WriteLine(@"L̲I̲B̲R̲A̲R̲Y̲ M̲A̲N̲A̲G̲E̲M̲E̲N̲T̲ S̲Y̲S̲T̲E̲M̲" + "\n");
+            Console.WriteLine(@"
+██╗░░░░░██╗██████╗░██████╗░░█████╗░██████╗░██╗░░░██╗  ░██████╗██╗░░░██╗░██████╗████████╗███████╗███╗░░░███╗
+██║░░░░░██║██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗░██╔╝  ██╔════╝╚██╗░██╔╝██╔════╝╚══██╔══╝██╔════╝████╗░████║
+██║░░░░░██║██████╦╝██████╔╝███████║██████╔╝░╚████╔╝░  ╚█████╗░░╚████╔╝░╚█████╗░░░░██║░░░█████╗░░██╔████╔██║
+██║░░░░░██║██╔══██╗██╔══██╗██╔══██║██╔══██╗░░╚██╔╝░░  ░╚═══██╗░░╚██╔╝░░░╚═══██╗░░░██║░░░██╔══╝░░██║╚██╔╝██║
+███████╗██║██████╦╝██║░░██║██║░░██║██║░░██║░░░██║░░░  ██████╔╝░░░██║░░░██████╔╝░░░██║░░░███████╗██║░╚═╝░██║
+╚══════╝╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝" + "\n");
         }
 
         /// <summary>
@@ -27,18 +33,20 @@ namespace LibraryManagementSystem.ConsoleApp.Views
             while (true)
             {
                 Logo();
-                Console.WriteLine("##############################################");
-                Console.WriteLine("Enter 1: Register book (CREATE)");
-                Console.WriteLine("Enter 2: Consult book registered (READ)");
-                Console.WriteLine("Enter 3: Consult all books (READ ALL)");
-                Console.WriteLine("Enter 4: Change book (UPDATE)");
-                Console.WriteLine("Enter 5: Remove book (DELETE)");
-                Console.WriteLine("Enter 6: Register user");
-                Console.WriteLine("Enter 7: Register loan");
-                Console.WriteLine("Enter 8: Return book");
+                Console.WriteLine("╔════════════════════════════════╗");
+                Console.WriteLine("║           MAIN MENU            ║");
+                Console.WriteLine("╚════════════════════════════════╝");
+                Console.WriteLine("Enter 1: Add a new book");
+                Console.WriteLine("Enter 2: View book details");
+                Console.WriteLine("Enter 3: List all books");
+                Console.WriteLine("Enter 4: Edit book details");
+                Console.WriteLine("Enter 5: Delete a book");
+                Console.WriteLine("Enter 6: Register new user");
+                Console.WriteLine("Enter 7: Register a loan");
+                Console.WriteLine("Enter 8: Return a book");
                 Console.WriteLine("Enter 9: EXIT");
-                Console.WriteLine("##############################################\n");
-                Console.WriteLine($"Create by: Bruno Silva: {DateTime.Now}");
+                Console.WriteLine("────────────────────────────────\n");
+                Console.WriteLine($"Create by: Bruno Silva - {DateTime.Now}");
 
                 Console.Write("\nEnter your option: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
@@ -56,23 +64,27 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                         Console.Write("Enter the year of publication: ");
                         int yearPublication = int.Parse(Console.ReadLine()!);
 
-                        srvBook.RegisterBook(title, autor, isbn, yearPublication);                        
+                        srvBook.CreateBook(title, autor, isbn, yearPublication);                        
                         break;
                     case 2:
                         Console.Write("Enter the name of the Book or Author: ");
                         string searchTerm = Console.ReadLine()!;
 
-                        srvBook.ConsultBookRegistered(searchTerm);                        
+                        srvBook.ViewBookRegistered(searchTerm);                        
                         break;
                     case 3:
-                        srvBook.ConsultAllBooks();
+                        srvBook.ListAllBooks();
                         Console.Clear();                        
                         break;
                     case 4:
-                        srvBook.ChangeBook();
+                        Console.Write("Enter the book ID to edit: ");
+                        int editId = int.Parse(Console.ReadLine()!);
+                        srvBook.EditBook(editId);
                         break;
                     case 5:
-                        srvBook.RemoveBook();
+                        Console.Write("Enter the book ID to delete: ");
+                        int delById = int.Parse(Console.ReadLine()!);
+                        srvBook.DeleteBook(delById);
                         break;
                     case 6:
                         usrService.RegisterUser();
