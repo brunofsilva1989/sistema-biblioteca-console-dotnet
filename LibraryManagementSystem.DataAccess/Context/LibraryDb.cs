@@ -10,8 +10,9 @@ namespace LibraryManagementSystem.DataAccess.Context
     public class LibraryDb
     {
         private static int lastId = 3; 
+        private static int lastGenericId = 0;
         
-        public Dictionary<string, User> Users = new Dictionary<string, User>();
+        public Dictionary<int, User> Users = new Dictionary<int, User>();
         
         public Dictionary<int, Book> Books = new Dictionary<int, Book>();
                 
@@ -19,7 +20,7 @@ namespace LibraryManagementSystem.DataAccess.Context
 
         public LibraryDb()
         {
-            Users = new Dictionary<string, User>();            
+            Users = new Dictionary<int, User>();            
             Books = new Dictionary<int, Book>();
             Loans = new Dictionary<int, Loan>();
 
@@ -49,6 +50,34 @@ namespace LibraryManagementSystem.DataAccess.Context
         }
 
         /// <summary>
+        /// New Loan
+        /// </summary>
+        public void AddNewLoan(Loan newLoan)
+        {
+            //cadastrar novo emprestimo
+            int newIdLoan = GenericGenerateId();
+            newLoan.Id = newIdLoan;
+            Loans.Add(newIdLoan,newLoan);
+            System.Console.WriteLine("Loan Add!");
+        }
+
+        public void ReturnLoan(int id)
+        {
+            Loans.Remove(id);
+            Console.WriteLine("Successfully returned Loan!");
+            Thread.Sleep(3000);
+        }
+
+        /// <summary>
+        /// Add new user
+        /// </summary>
+        public void AddNewUser(User newUser)
+        {           
+            Users.Add(newUser.Id, newUser);
+            Console.WriteLine("User Add!");
+        }
+
+        /// <summary>
         /// Delete book
         /// </summary>
         /// <param name="id"></param>
@@ -58,7 +87,7 @@ namespace LibraryManagementSystem.DataAccess.Context
             Console.WriteLine("Successfully deleted Book!");
             Thread.Sleep(3000);
         }
-
+        
         /// <summary>
         /// Função para gerar Id's
         /// </summary>
@@ -67,6 +96,12 @@ namespace LibraryManagementSystem.DataAccess.Context
         {
             lastId++;
             return lastId;
+        }
+
+        public int GenericGenerateId()
+        {
+            lastGenericId++;
+            return lastGenericId;
         }
 
     }

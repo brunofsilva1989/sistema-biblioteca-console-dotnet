@@ -27,7 +27,8 @@ namespace LibraryManagementSystem.ConsoleApp.Views
             LibraryDb dbContext = new LibraryDb();
 
             Bookservice srvBook = new Bookservice(dbContext);
-            Userservice usrService = new Userservice();
+            Userservice usrService = new Userservice(dbContext);
+            Loanservice srvLoan = new Loanservice(dbContext);
 
             bool keepRunning = true;
             while (true)
@@ -42,9 +43,10 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                 Console.WriteLine("Enter 4: Edit book details");
                 Console.WriteLine("Enter 5: Delete a book");
                 Console.WriteLine("Enter 6: Register new user");
-                Console.WriteLine("Enter 7: Register a loan");
-                Console.WriteLine("Enter 8: Return a book");
-                Console.WriteLine("Enter 9: EXIT");
+                Console.WriteLine("Enter 7: View users");
+                Console.WriteLine("Enter 8: Register loan");
+                Console.WriteLine("Enter 9: Return book");
+                Console.WriteLine("Enter -1: EXIT");
                 Console.WriteLine("────────────────────────────────\n");
                 Console.WriteLine($"Create by: Bruno Silva - {DateTime.Now}");
 
@@ -64,17 +66,17 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                         Console.Write("Enter the year of publication: ");
                         int yearPublication = int.Parse(Console.ReadLine()!);
 
-                        srvBook.CreateBook(title, autor, isbn, yearPublication);                        
+                        srvBook.CreateBook(title, autor, isbn, yearPublication);
                         break;
                     case 2:
                         Console.Write("Enter the name of the Book or Author: ");
                         string searchTerm = Console.ReadLine()!;
 
-                        srvBook.ViewBookRegistered(searchTerm);                        
+                        srvBook.ViewBookRegistered(searchTerm);
                         break;
                     case 3:
                         srvBook.ListAllBooks();
-                        Console.Clear();                        
+                        Console.Clear();
                         break;
                     case 4:
                         Console.Write("Enter the book ID to edit: ");
@@ -87,15 +89,33 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                         srvBook.DeleteBook(delById);
                         break;
                     case 6:
-                        usrService.RegisterUser();
+                        Console.WriteLine("Enter the user name: ");
+                        string name = Console.ReadLine()!;
+                        Console.WriteLine("Enter the user's CPF: ");
+                        string cpf = Console.ReadLine()!;
+                        Console.WriteLine("Enter the user's email: ");
+                        string email = Console.ReadLine()!;
+
+                        usrService.RegisterUser(name, cpf, email);
                         break;
                     case 7:
-                        srvBook.RegisterLoan();
+                        usrService.ViewUsers();
                         break;
-                    case 8:
-                        srvBook.ReturnBook();
+                    case 8:                        
+                        Console.WriteLine("Enter the user's CPF: ");
+                        string cpfLoan = Console.ReadLine()!;
+                        Console.WriteLine("Enter the id of the book: ");
+                        int idBook = int.Parse(Console.ReadLine()!);
+
+                        srvLoan.RegisterLoan(cpfLoan, idBook);
                         break;
                     case 9:
+                        Console.WriteLine("Enter the loan ID to return: ");
+                        int idLoan = int.Parse(Console.ReadLine()!);
+
+                        srvLoan.ReturnBook(idLoan);
+                        break;
+                    case -1:
                         Exit();
                         break;
                     default:
@@ -107,7 +127,7 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                         Menu();
                         break;
                 }
-            }                                   
+            }
         }
 
         public static void Exit()

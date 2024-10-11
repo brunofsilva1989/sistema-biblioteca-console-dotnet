@@ -170,16 +170,6 @@ namespace LibraryManagementSystem.Business.Services
                 Console.WriteLine("Id não encontrado");
             }
                                  
-        }
-
-        public void RegisterLoan()
-        {
-
-        }
-
-        public void ReturnBook()
-        {
-
-        }
+        }    
     }
 }
