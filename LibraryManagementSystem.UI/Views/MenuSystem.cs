@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.ConsoleApp.Views
     public class MenuSystem
     {
         /// <summary>
-        /// Function to show the logo
+        /// Function to show logo
         /// </summary>
         public static void Logo()
         {
@@ -37,11 +37,11 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                 Console.WriteLine("╔════════════════════════════════╗");
                 Console.WriteLine("║           MAIN MENU            ║");
                 Console.WriteLine("╚════════════════════════════════╝");
-                Console.WriteLine("Enter 1: Add a new book");
+                Console.WriteLine("Enter 1: Add new book");
                 Console.WriteLine("Enter 2: View book details");
                 Console.WriteLine("Enter 3: List all books");
                 Console.WriteLine("Enter 4: Edit book details");
-                Console.WriteLine("Enter 5: Delete a book");
+                Console.WriteLine("Enter 5: Delete book");
                 Console.WriteLine("Enter 6: Register new user");
                 Console.WriteLine("Enter 7: View users");
                 Console.WriteLine("Enter 8: Register loan");
@@ -57,19 +57,19 @@ namespace LibraryManagementSystem.ConsoleApp.Views
                 switch (choice)
                 {
                     case 1:
-                        Console.Write("Enter the title of the Book: ");
+                        Console.Write("Enter the title of Book: ");
                         string title = Console.ReadLine()!;
-                        Console.Write("Enter the author of the Book: ");
+                        Console.Write("Enter the author of Book: ");
                         string autor = Console.ReadLine()!;
-                        Console.Write("Enter the ISBN of the Book: ");
+                        Console.Write("Enter the ISBN of Book: ");
                         string isbn = Console.ReadLine()!;
-                        Console.Write("Enter the year of publication: ");
+                        Console.Write("Enter year of publication: ");
                         int yearPublication = int.Parse(Console.ReadLine()!);
 
                         srvBook.CreateBook(title, autor, isbn, yearPublication);
                         break;
                     case 2:
-                        Console.Write("Enter the name of the Book or Author: ");
+                        Console.Write("Enter the name of Book or Author: ");
                         string searchTerm = Console.ReadLine()!;
 
                         srvBook.ViewBookRegistered(searchTerm);

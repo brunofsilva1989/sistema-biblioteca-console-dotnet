@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using LibraryManagementSystem.DataAccess.Context;
+﻿using LibraryManagementSystem.DataAccess.Context;
 using LibraryManagementSystem.Domain.Entities;
 
 namespace LibraryManagementSystem.Business.Services
